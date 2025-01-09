@@ -1,0 +1,32 @@
+.channel-section{
+    height: 60vh;
+    max-width: 100%;
+    padding-left: 0px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    align-items: flex-start;
+    position: relative;
+}
+.subscribtion1:hover{
+    scale: 0.95;
+}
+.subscribtion1:active{
+    scale: 0.85;
+}
+.vpselector{
+    border: none;
+    padding: 2vh 1vw;
+    font-size: 2.7vh;
+    background-color: transparent;
+    color: rgba(0,0,0,0.5);
+    transition: all 0.2s ease;
+}
+.vpselector:hover{
+    background-color: rgba(0,0,0,0.15);
+}
+.bottomBorder{
+    border-bottom: 1px solid black;
+    color: black;
+    margin-bottom: -1px;
+}

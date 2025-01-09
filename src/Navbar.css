@@ -1,0 +1,95 @@
+.navbar{
+    height: 10vh;
+    width: 94.9vw;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    position: absolute;
+    top:0px;
+}
+.sidebar_logo{
+    background-color: white;
+}
+.search{
+    width: 47vw;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+#search{
+    width: 85%;
+    height: 36%;
+    border: 1.5px solid rgba(0, 0, 0, 0.6);
+    border-top-left-radius: 17px;
+    border-bottom-left-radius: 17px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    background-color: white;
+    margin: auto 0;
+}
+#search:focus{
+    outline: none;
+    border: 1.7px solid rgba(0, 0, 0, 0.6);
+    box-shadow: none;
+}
+.search button{
+    width: 10%;
+    height: 80%;
+    border: 1.5px solid black;
+    border-left: none;
+    background-color: rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-right-radius: 17px;
+    border-bottom-right-radius: 17px;
+}
+
+.nan1{
+    transform: scale(0);
+}
+
+.filter-options{
+    position: relative;
+    height: 50vh;
+    width: 35vw;
+    padding-top: 5vh;
+    background-color: rgb(245, 245, 245);
+    border-radius: 5%;
+}
+select{
+    border: none;
+    background-color: rgb(245, 245, 245);
+}
+select:focus{
+    outline: none;
+}
+option{
+    background-color: rgb(245, 245, 245);
+}
+.apply-filter-button{
+    height:15%;
+    width:35%;
+    margin:0 32.5%;
+    margin-top:8%;
+    background-color:greenyellow;
+    border:none;
+    border-radius:5px ;
+    color: white;
+    font-size: 2.5vh;
+    transition: all 0.3s ease;
+}
+.apply-filter-button:hover{
+    background-color: green;
+    color:yellow;
+    box-shadow: 2px 2px 7px black;
+}
+.user_details{
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+}

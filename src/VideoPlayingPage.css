@@ -1,0 +1,95 @@
+.nan{
+    display: none;
+}
+
+.playing-video-section{
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.video-section{
+    width: 57vw/*calc(6vw + 740px)*/;
+    height: fit-content;
+    margin-top: 10vh;
+}
+
+.comment-section{
+    height: calc(32vh + 480px);
+    width: 40vw/*calc(94vw - 740px)*/;
+    margin-top: 10vh;
+    padding-left: 2vw;
+    overflow-y: scroll;
+}
+
+.comment-writing-section{
+    height: 10vh;
+    width: 100%;
+    position: sticky;
+    top:0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+#comment-input{
+    max-height: 30%;
+    margin: auto 0;
+    margin-left: 15px;
+    margin-right: 8px;
+}
+#comment-input:focus{
+    outline: none;
+    border: 1px solid rgba(0,0,0,0.7);
+}
+
+.views_and_created_section{
+    max-width: 100%;
+    padding-left: 6vw;
+    color: rbga(0,0,0,0.5);
+    font-size: 13px;
+}
+.channel-section1{
+    height: 14%;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-left: 6vw;
+}
+.avatar{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-position: center;
+    cursor: pointer;
+}
+.subButton{
+    height:35px;
+    width:fit-content;
+    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:5px 10px;
+    background-color:black;
+    color:white;
+    border: none;
+    border-radius:15px;
+    transition: all 0.15s ease;
+}
+.subButton:hover{
+    scale: 0.95;
+}
+.subButton:active{
+    scale: 0.85;
+}
+.accessory_section{
+    padding-left: 6vw;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    height: 30px;
+}

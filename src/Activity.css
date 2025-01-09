@@ -1,0 +1,51 @@
+.activity{
+    height: 100vh;
+    width: 100vw;
+}
+.watch-history{
+    height: 52vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.watch-history-video-container{
+    height: 47vh;
+    width: 98vw;
+    padding-left: 2vw;
+    display: flex;
+    overflow-x: scroll;
+    flex-shrink: 0;
+    gap: 20px;
+    align-items: center;
+}
+.nan{
+    display: none;
+}
+.watch-history-video-container::-webkit-scrollbar{
+    width: 4px;
+    height: 4px;
+}
+.watch-history-video-container::-webkit-scrollbar-thumb{
+    background-color: #666;
+    border-radius: 2px;
+}
+.watch-history-video-container::-webkit-scrollbar-track{
+    background-color: transparent;
+}
+.view-all{
+    height: 5.5vh;
+    width: 6vw;
+    border-radius: 20px;
+    position: absolute;
+    right: 2vw;
+    top:1vh;
+    color: black;
+    border : 1px solid rgba(0, 0, 0, 0.5);
+    background-color: transparent;
+    transition: all 0.1s linear;
+    outline: none;
+}
+.view-all:active{
+    scale: 0.9;
+}

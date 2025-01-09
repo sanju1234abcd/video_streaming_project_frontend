@@ -1,0 +1,31 @@
+const playerRef = useRef(null)
+  const videoLink = "http://res.cloudinary.com/dxm27kskt/video/upload/v1731082256/buatn0txr7ppntrki7ii.mp4"
+  const videoOptions ={
+    controls:true,
+    responsive:true,
+    fluid:true,
+    sources:[{
+      src:videoLink,
+      type:"video/mp4"
+    }]
+  }
+
+  const handlePlayerReady = (player)=>{ // can copy it from video.js documentation
+    playerRef.current = player
+
+    //you can handle player events here, for example:
+    player.on("waiting",()=>{
+      videojs.log("player is waiting")
+    });
+    player.on("dispose",()=>{
+      videojs.log("player will dispose")
+    });
+  }
+
+  return (
+    <div className="App">
+      <VideoPlayer
+      options ={videoOptions}
+      onReady={handlePlayerReady}/>
+    </div>
+  );

@@ -1,0 +1,7 @@
+.videos{
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+    justify-content: center;
+}
