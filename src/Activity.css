@@ -49,3 +49,35 @@
 .view-all:active{
     scale: 0.9;
 }
+
+.select-menu {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+}
+
+.select-menu select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 0;
+    appearance: none;
+    background-color: transparent;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.select-menu select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.select-menu select option {
+    border: none;
+    background: transparent;
+    padding: 10px;
+}

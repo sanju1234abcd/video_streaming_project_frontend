@@ -1,0 +1,22 @@
+.post{
+    height: fit-content;
+    max-width: 100%;
+    margin-bottom: 2.5vh;
+    padding-left: 3vw;
+    border: 1px solid rgba(26, 25, 25, 0.3);
+}
+.post-owner-section{
+    height: 10vh;
+    width: 60%;
+    display: flex;
+    align-items: center;
+}
+.postOwner-and-created-time-section{
+    height: 100%;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 0px;
+    padding-left: 2vw;
+}

@@ -208,7 +208,7 @@ function UserProfileDashboard(){
       <h3 className="update">{update}</h3>
       <section className="dashboard-profile">
        <img src={user.avatar} alt="Profile Picture" />
-        <span style={{color:'white',fontSize:'2.6vh',cursor:'pointer'}} onClick={()=>{navigate(`/channel/${userId}`)}}>visit your channel</span>
+        <span id="visit-channel" style={{color:'white',fontSize:'2.6vh',cursor:'pointer',transition:"all 0.5s ease"}} onClick={()=>{navigate(`/channel/${userId}`)}}>visit your channel-&gt;</span>
         {edit? <input value ={fullName} onChange={(e)=>{setFullName(e.target.value)}} /> :  <h2>{user.fullname1}</h2>}
         {edit? <div>
         <input value ={Email} onChange={(e)=>{setEmail(e.target.value)}} />

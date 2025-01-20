@@ -65,7 +65,7 @@ function Videos(props){
                 {
                     videos.map((video,index)=>(
                         (   
-                            <VideoComponent video={video} sameUser = {sameUser}/>                              
+                            <VideoComponent key={index} video={video} sameUser = {sameUser} />                              
                         )
                     ))      
                 }

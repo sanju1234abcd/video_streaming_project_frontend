@@ -37,6 +37,9 @@
   align-items: center;
   justify-content: center;
 }
+#visit-channel:hover{
+  text-shadow: 2px 2px black;
+}
 .no_change_password_cover{
   display: none;
 }

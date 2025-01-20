@@ -14,7 +14,7 @@ const Activity = ()=>{
             method:'GET',
             credentials:'include'
         })
-         response1.json().then(async(e)=>{  
+         await response1.json().then(async(e)=>{  
             if(e.data && (e.data.watchedVideos.length > 0)){
                 setHasMore(e.data.watchedVideos.length == 5)
                 setVideos(e.data.watchedVideos.reverse())
@@ -27,7 +27,7 @@ const Activity = ()=>{
                 method:'GET',
                 credentials:'include'
             })
-            response.json().then((e)=>{
+            await response.json().then((e)=>{
                 setUsername(e.data.user.fullname)
                 setProfile(e.data.user.avatar)
             })
@@ -54,7 +54,14 @@ const Activity = ()=>{
 
                 </div>
             </div>
-
+            <div className="select-menu">
+            <select>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+                <option value="4">Option 4</option>
+            </select>
+        </div>
         </div>
     );
 }

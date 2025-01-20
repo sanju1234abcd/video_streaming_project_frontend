@@ -12,7 +12,7 @@ function Navbar(){
     const searchQuery = useRef(null)
     const userdata = useRef(null)
     const [filterclose,setFilterclose] =  useState(true)
-    const [sortBy,setSortBy] = useState(null);
+    const [sortBy,setSortBy] = useState('none');
     const [sortType,setSortType] = useState(null);
     const [channelName,setChannelName] = useState('')
     

@@ -147,13 +147,15 @@ const VideoPlayingPage=()=>{
             for (let i = 0; i < commentOutput.data[0].length; i++) {
            
                 const commmentLikeResponse = await fetch(`http://localhost:8000/api/v1/likes/c/${commentOutput.data[1][i]._id}`)
-                commmentLikeResponse.json().then((e11)=>{
+                await commmentLikeResponse.json().then((e11)=>{
                   const commentData = {
                     id : commentOutput.data[1][i]._id,
                     content : commentOutput.data[1][i].content,
                     fullname : commentOutput.data[0][i].fullname,
                     avatar : commentOutput.data[0][i].avatar,
-                    likes : e11.data
+                    owner: commentOutput.data[1][i].owner,
+                    creator : (commentOutput.data[1][i].owner == e.data.owner),
+                    likes : e11.data,
                   }
                 commentset.push(commentData)
               })
@@ -212,12 +214,14 @@ const VideoPlayingPage=()=>{
         for (let i = 0; i < commentOutput.data[0].length; i++) {
           
             const commmentLikeResponse = await fetch(`http://localhost:8000/api/v1/likes/c/${commentOutput.data[1][i]._id}`)
-            commmentLikeResponse.json().then((e11)=>{
+            await commmentLikeResponse.json().then((e11)=>{
               const commentData = {
                 id :commentOutput.data[1][i]._id,
                 content : commentOutput.data[1][i].content,
                 fullname : commentOutput.data[0][i].fullname,
                 avatar : commentOutput.data[0][i].avatar,
+                creator : (commentOutput.data[1][i].owner == ownerId),
+                owner: commentOutput.data[1][i].owner,
                 likes : e11.data
               }
               commentset.push(commentData)

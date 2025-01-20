@@ -4,6 +4,7 @@ import Videos from './Videos'
 import "./ChannelPage.css"
 import { AppContext } from "./AppContext";
 import { ToastContainer ,toast } from "react-toastify";
+import Posts from "./Posts";
 const ChannelPage = ()=>{
     const searchParams = useParams();
     const {totalVideos,setSameUser,sameUser} = useContext(AppContext)
@@ -91,7 +92,7 @@ const ChannelPage = ()=>{
             <div style={{display:'flex',flexShrink:'0',flexDirection:'column'}}>
 
             <div className="channel-section">
-            <div style={{height:'70%',width:'100%',background:`url(${coverImage})`,objectFit:'cover',backgroundPosition:'center'}}></div>
+            <img src={coverImage} style={{height:'70%',width:'100%',objectFit:'cover',backgroundPosition:'center',backgroundRepeat:'no-repeat'}}/>
             <img src={avatar} alt="" style={{height:'25vh',width:'25vh',borderRadius:'50%',objectFit:'cover',backgroundPosition:'center',position:'absolute',left:'10vw',bottom:'5vh'}} />
             <h2 style={{position:'absolute',left:'calc(30vh + 10vw)',top:'44vh',margin:'auto 0px'}}>{fullName}</h2>
             <span style={{fontSize:'2vh',position:'absolute',left:'calc(29vh + 10vw)',top:'50vh',display:'flex',alignItems:'center'}}>
@@ -107,7 +108,7 @@ const ChannelPage = ()=>{
             </div>
             
             { (vpselector == 'v') ?
-             (<Videos route={`${channelId}`} sameUser={sameUser}/>):( <div>Posts</div> )
+             (<Videos route={`${channelId}`} sameUser={sameUser}/>):( <Posts route={`${channelId}`} sameUser={sameUser} /> )
             }
             
         </div>
