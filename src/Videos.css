@@ -1,7 +1,12 @@
-.videos{
-    width: 100%;
-    height: fit-content;
+.infinite_scroll_videos{
     display: grid;
-    grid-template-columns: repeat(3,auto);
+    grid-template-columns: repeat(3,28vw);
     justify-content: center;
+}
+@media (max-width:650px){
+    .infinite_scroll_videos{
+        display: grid;
+        grid-template-columns: repeat(1,100%);
+        justify-items: center !important;
+    }
 }

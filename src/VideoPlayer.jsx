@@ -7,27 +7,43 @@ import { AiFillAlipaySquare } from "react-icons/ai";
 import { MdSettings } from "react-icons/md";
 import "./VideoPlayer.css";
 import {FFmpeg} from "@ffmpeg/ffmpeg";
+import { fetchFile, toBlobURL } from "@ffmpeg/util";
 import { useLocation } from "react-router-dom";
 
-
 export const VideoPlayer = (props) => {
-  const ffmpeg = new FFmpeg({
-    corePath:'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd/ffmpeg-core.js'
-  })
-  //{corePath:'https://unpkg.com/@ffmpeg/core@0.10.0/dist/ffmpeg-core.js'}
-  
+  const [outputUrl,setOutputUrl] = useState('');
   const videoRef = useRef(null);
   const playerRef = useRef(null);
   const { url,videoId } = props;
-  const videoUrl = useRef(null);
   const duration = useRef(0)
   var previousTime = 0;
   const playerInstance= useRef(null)
   const [quality,setQuality]  = useState('720p')
   const hasCountedView = useRef(false)
   const [watchTime,setwatchTime] = useState(0)
-  videoUrl.current = url
   const location = useLocation();
+
+  const ffmpeg = new FFmpeg({corePath: 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd/ffmpeg-core.js'});
+  const convertTo480p = async (url) => {
+    await ffmpeg.load();
+    ffmpeg.FS('writeFile', 'input.mp4', await fetch(url).then(res => res.arrayBuffer()));
+    await ffmpeg.run('-i', 'input.mp4', '-vf', 'scale=854:480', 'output.mp4');
+    const data = ffmpeg.FS('readFile', 'output.mp4');
+    const outputUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
+    setOutputUrl(outputUrl);
+  };
+
+  const convertTo144p = async (url) => {
+    await ffmpeg.load();
+    console.log("ffmpeg loaded")
+    await ffmpeg.writeFile('input.mp4', await fetchFile(url))
+    await ffmpeg.exec(['-i', 'input.mp4', '-vf', 'scale=256:144', 'output.mp4']);
+    const data = await ffmpeg.readFile("output.mp4")
+    const outputUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
+    setOutputUrl(outputUrl);
+    console.log(outputUrl)
+  };
+
   useEffect(() =>{
     
     var options = {
@@ -50,8 +66,8 @@ export const VideoPlayer = (props) => {
       videoRef.current.appendChild(videoElement);
 
       const player = (playerRef.current = videojs(videoElement,options));
-      
-      player.el().style.height='480px'
+      player.el().classList.add('videoPlayer')
+     // player.el().style.height= '480px'
       player.el().style.width='100%';
       player.el().style.borderRadius = '5px'
       player.el().style.overflow='hidden'
@@ -93,7 +109,7 @@ qualityMenuButton.addEventListener('click',()=>{
 
 // Add event listeners to quality menu items
 document.querySelectorAll('.vjs-quality-menu li').forEach((item) => {
-  item.addEventListener('click', () => {
+  item.addEventListener('click', async() => {
     // Get the selected quality
     const selectedQuality = item.getAttribute('data-quality');
 

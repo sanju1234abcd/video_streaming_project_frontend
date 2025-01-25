@@ -81,7 +81,6 @@ const ChannelPage = ()=>{
                 }
                 catch(error){
                     setUser(false)
-                    console.log("error: ",error)
                 }
             })
         })()
@@ -93,12 +92,13 @@ const ChannelPage = ()=>{
 
             <div className="channel-section">
             <img src={coverImage} style={{height:'70%',width:'100%',objectFit:'cover',backgroundPosition:'center',backgroundRepeat:'no-repeat'}}/>
-            <img src={avatar} alt="" style={{height:'25vh',width:'25vh',borderRadius:'50%',objectFit:'cover',backgroundPosition:'center',position:'absolute',left:'10vw',bottom:'5vh'}} />
-            <h2 style={{position:'absolute',left:'calc(30vh + 10vw)',top:'44vh',margin:'auto 0px'}}>{fullName}</h2>
-            <span style={{fontSize:'2vh',position:'absolute',left:'calc(29vh + 10vw)',top:'50vh',display:'flex',alignItems:'center'}}>
-                @{userName} &bull;
+            <img id="channel-section-avatar" src={avatar} alt="" />
+            <h2>{fullName}</h2>
+            <span id="channel-section-details-span">
+                <span style={{marginTop:'1vh'}}>@{userName} &bull;
                 <span style={{opacity:'0.65'}}>&nbsp;{subscribers} subscribers &bull; {totalVideos} videos</span>
-                {user && <button className='subscribtion1' onClick={handlesubscription} style={{height:'5vh',width:'fit-content',marginLeft:'2vw',padding:'1vh 0.5vw',display:'flex',alignItems:'center',justifyContent:'center',border:'none',borderRadius:'15px',backgroundColor:'black',color:'white',transition:'all 0.15s ease'}}>{subscription ? 'unsubscribe':'subscribe'}</button> }
+                </span>
+                {user && <button className='subscribtion1' onClick={handlesubscription} >{subscription ? 'unsubscribe':'subscribe'}</button> }
             </span>
             </div>
             

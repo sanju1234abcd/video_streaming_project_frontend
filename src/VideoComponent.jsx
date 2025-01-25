@@ -101,11 +101,11 @@ const VideoComponent = (props)=>{
                 
                 <img src={Avatar} title="explore this channel" onClick={(event)=>{event.stopPropagation();navigate(`/channel/${owner}`)}} style={{height:'30px',width:'30px',borderRadius:'50%',objectFit:'cover',backgroundPosition:'center',cursor:'pointer'}}/>
                 
-                <h3 style={{fontSize:'2.8vh'}}>{(title.length > 30) ? (title.substr(0,30) + '...') : title}</h3>
+                <h3>{(title.length > 30) ? (title.substr(0,30) + '...') : title}</h3>
             </div>
             <div className="views-section">
-                <h4 style={{fontSize:'2.1vh'}}>{(Fullname.length > 30) ? (Fullname.substr(0,30) + '..') : Fullname}</h4>
-                <span style={{fontSize:'2vh'}}>{views} views &bull; {timelapse} ago</span>
+                <h4>{(Fullname.length > 30) ? (Fullname.substr(0,30) + '..') : Fullname}</h4>
+                <span>{views} views &bull; {timelapse} ago</span>
             </div>
             <div className={`advanced-option1 ${advanced ? '':'nan1'}`}>
                 <ul style={{height:"100%",width:'100%',paddingLeft:'2%',borderRadius:'10px',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>

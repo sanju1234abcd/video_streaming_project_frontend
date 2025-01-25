@@ -33,4 +33,13 @@
   .vjs-quality-menu li:hover {
     background-color: #f5f5f5;
   }
+  .videoPlayer{
+    height: 480px;
+  }
+
+  @media (max-width: 650px){
+    .videoPlayer{
+      height: 300px;
+    }
+  }
   

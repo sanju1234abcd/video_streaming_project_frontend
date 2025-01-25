@@ -85,7 +85,7 @@ function Navbar(){
             <div style={{height:'80%',width:'50%',display:'flex',alignItems:'center',justifyContent:'center'}}>
             <div className="search">
                 <input ref={searchQuery} placeholder="search here" type="text" name="search" id="search"/>
-                <button onClick={searching}><MdSearch size={24} color="#000"/></button>
+                <button onClick={searching}><MdSearch id="MdSearch" size={24} color="#000"/></button>
             </div>
             <AiOutlineFilter title="filter" style={{height:'5vh',width:'3vw',color:'black'}} onClick={()=> setFilterclose(false)} />
             </div>

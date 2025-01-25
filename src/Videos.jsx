@@ -3,6 +3,7 @@ import "./Videos.css"
 import VideoComponent from "./VideoComponent";
 import InfiniteScroll from "react-infinite-scroller";
 import { AppContext } from "./AppContext";
+import { useLocation } from "react-router-dom";
 
 function Videos(props){
     const route = props.route
@@ -11,7 +12,6 @@ function Videos(props){
     const [videos,setVideos] = useState([])
     const [hasMore,setHasMore] = useState(true)
     const page = useRef(2)
-    
 
     async function videoLoading (){
         const response = await fetch(`${ (route.trim() == '') ? 'http://localhost:8000/api/v1/videos/random' : `http://localhost:8000/api/v1/videos/search?page=1&limit=6&channelId=${route}`}`)
@@ -57,10 +57,8 @@ function Videos(props){
             loader ={<div>loading...</div>}
             useWindow={true}
             delay={500}
+            className="infinite_scroll_videos"
             //threshold={400} //load more videos when 400 px from the button
-            style={{display: 'grid',
-                gridTemplateColumns: 'repeat(3,auto)',
-                justifyContent: 'center'}}
             >
                 {
                     videos.map((video,index)=>(

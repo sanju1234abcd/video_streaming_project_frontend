@@ -20,7 +20,7 @@ const Search = ()=>{
         setLoading(true)
         const response = await fetch(`http://localhost:8000/api/v1/videos/search?page=1&limit=6&query=${query}&sortBy=${sortBy}&sortType=${sortType}&fullName=${fullname}`)
         const output =  response.json()
-        output.then((e)=>{
+        await output.then((e)=>{
             if(e.data != null){
             setVideos(e.data)
             setHasMore( e.data.length == 6)
@@ -60,7 +60,7 @@ const Search = ()=>{
     }
 
     useEffect(()=>{
-        
+
         const searchQueries = location.search.replace("?","").split("&")
         const query = searchQueries[0].replace("query=","").replace("%20"," ")
         const sortBy1 = searchQueries[1].replace("sortBy=","")
@@ -69,6 +69,7 @@ const Search = ()=>{
         const sortType = (sortType1 === "ascending") ? parseInt(1) : parseInt(-1)
         const fullname = searchQueries[3].replace("fullname=","").replace("%20"," ")
         searchResults(query,sortBy,sortType,fullname)
+        page.current = 2
     },[location])
 
     return(
@@ -77,7 +78,7 @@ const Search = ()=>{
             <SidebarPopup/>
             <h2 style={{paddingLeft:'5vw',marginTop:"10vh"}}>Searched Videos</h2>
             {loading ? (
-                <Spinner/>
+                <Spinner height='90vh' width='100vw'/>
             ) : 
          (<div className="searchVideoHolder" style={{height:'fit-content'}}>
              { (Array.isArray(videos) && (videos.length > 0)) ?
@@ -88,10 +89,8 @@ const Search = ()=>{
         loader ={<div>loading...</div>}
         useWindow={true}
         //delay={500}
-        //threshold={400} //load more videos when 400 px from the button
-        style={{display: 'grid',
-            gridTemplateColumns: 'repeat(3,auto)',
-            justifyContent: 'center'}}
+        threshold={40} //load more videos when 400 px from the button
+        className="infinite_search_videos"
         >
             {
                 videos.map((video,index)=>(
