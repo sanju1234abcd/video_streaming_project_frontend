@@ -1,0 +1,19 @@
+.intoComment{
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    position: relative;
+    scrollbar-width: none;
+}
+.main-comment{
+    height: fit-content;
+    width: 100%;
+    position: sticky;
+    top:0;
+    border-bottom: 1px solid rgb(82, 80, 80);
+    padding-top: 5vh;
+    background-color: white;
+}
+.intoComment::-webkit-scrollbar{
+    display: none;
+}

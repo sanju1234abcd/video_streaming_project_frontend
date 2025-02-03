@@ -11,11 +11,14 @@ import { FaRegThumbsUp,FaThumbsUp } from "react-icons/fa";
 import { AiOutlineSend } from "react-icons/ai";
 import SidebarPopup from "./SidebarPopup.jsx";
 import Comment from "./Comment.jsx"
+import { AppContext } from "./AppContext.js";
+import IntoComment from "./IntoComment.jsx";
 
 const VideoPlayingPage=()=>{
     const searchParams = useParams()
     const location = useLocation()
     const navigate = useNavigate()
+    const {intoComment,setIntoComment} = useContext(AppContext)
     const [url,setUrl] = useState('')
     const [title,setTitle] = useState('')
     const [fullname,setFullname] = useState('')
@@ -28,6 +31,7 @@ const VideoPlayingPage=()=>{
     const [subscribtion,setSubscribtion] = useState(null)
     const [comments,setComments] = useState([])
     const [comment,setComment] = useState('')
+    const [totalComments,setTotalComments] = useState([])
     const [hasMore,setHasMore] = useState(true)
     const [videoPlayerReload,setVideoPlayerReload] = useState(false)
     const [userLikedComments,setUserLikedComments] = useState([])
@@ -53,7 +57,7 @@ const VideoPlayingPage=()=>{
     }
 
     async function fetchVideoUrl(){
-        
+        setIntoComment({})
         const response = await fetch(`http://localhost:8000/api/v1/videos/${searchParams.videoId}`)
         const output =  response.json()
         output.then(async(e)=>{
@@ -141,6 +145,8 @@ const VideoPlayingPage=()=>{
           try{
           const commentResponse = await fetch(`http://localhost:8000/api/v1/comments/${searchParams.videoId}?page=1&limit=10`)
           const commentOutput = await commentResponse.json()
+          setTotalComments(commentOutput.message)
+          
           const commentset = []
           setHasMore(commentOutput.data[0].length == 10);
           
@@ -156,6 +162,7 @@ const VideoPlayingPage=()=>{
                     owner: commentOutput.data[1][i].owner,
                     creator : (commentOutput.data[1][i].owner == e.data.owner),
                     likes : e11.data,
+                    numberOfComments : commentOutput.data[2][i]
                   }
                 commentset.push(commentData)
               })
@@ -222,7 +229,8 @@ const VideoPlayingPage=()=>{
                 avatar : commentOutput.data[0][i].avatar,
                 creator : (commentOutput.data[1][i].owner == ownerId),
                 owner: commentOutput.data[1][i].owner,
-                likes : e11.data
+                likes : e11.data,
+                countOfComments : commentOutput.data[2][i]
               }
               commentset.push(commentData)
           })
@@ -238,7 +246,20 @@ const VideoPlayingPage=()=>{
       toast.error('there is no content in the comment',{
         pauseOnHover:true,
       })
-    }else{
+    }
+    else if(intoComment.id){
+      await fetch(`http://localhost:8000/api/v1/comments/comment/${intoComment.id}`,{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body: JSON.stringify({ content: comment }),
+        credentials:'include'
+      })
+      console.log(intoComment.id)
+      setComment('')
+    }
+    else{
     await fetch(`http://localhost:8000/api/v1/comments/${searchParams.videoId}`,{
       method:'POST',
       headers:{
@@ -299,30 +320,35 @@ const VideoPlayingPage=()=>{
           </div>
 
           
-          <div className="comment-section">
+          <div className="comment-section" style={{zIndex:7}}>
 
             <div className="comment-writing-section">
-              <h4 style={{display:'inline'}}>Comments</h4>
-              <input type="text" className={User? "":"nan"} placeholder="write a comment" value={comment} id="comment-input" onChange={(e)=>setComment(e.target.value)}/>
+              <h4 style={{display:'flex'}}>Comments ({totalComments})</h4>
+              <input type="text" className={User? "":"nan"} placeholder={intoComment.id ? "reply to this comment":"write a comment"} value={comment} id="comment-input" onChange={(e)=>setComment(e.target.value)}/>
               <AiOutlineSend size={20} className={User? "":"nan"} color="black" id="commentSend" onClick={addCommentHandler}/>
             </div>
-            {(Array.isArray(comments) && (comments.length > 0)) ? (
+            {(!intoComment.id ) ? 
+              ((Array.isArray(comments) && (comments.length > 0)) ? (
 
-              <InfiniteScroll
-              loadMore = {loadMoreComments}
-              hasMore = {hasMore}
-              loader ={<div>loading</div>}
-              getScrollParent={getScrollParent}
-              useWindow={false}
-              threshold={50}
-              >
-              {
-              comments.map((comment,index)=>(
-                <Comment comment={comment} userLikedComments={userLikedComments} key={index}/>
-              ))
-              }
-              </InfiniteScroll>
-            ) : ( <h3>There is no comments in this Video. Write a comment to start a conversation</h3> )
+                <InfiniteScroll
+                loadMore = {loadMoreComments}
+                hasMore = {hasMore}
+                loader ={<div>loading</div>}
+                getScrollParent={getScrollParent}
+                useWindow={false}
+                threshold={50}
+                >
+                {
+                comments.map((comment,index)=>(
+                  <Comment comment={comment} userLikedComments={userLikedComments} key={index}/>
+                ))
+                }
+                </InfiniteScroll>
+              ) : ( <h3>There is no comments in this Video. Write a comment to start a conversation</h3> )
+              ) :( 
+              <div style={{height:'calc(22vh + 480px)',position:'relative',width:'95%'}}> 
+              <IntoComment comment ={intoComment} userLikedComments = {userLikedComments} videoOwner={ownerId}/>
+              </div> )
             }
             
           </div>

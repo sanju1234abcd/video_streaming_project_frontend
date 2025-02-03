@@ -6,7 +6,9 @@ function AppContextProvider({children}){
     const [userData,setUserData] = useState(false)
     const [sameUser,setSameUser] = useState(false)
     const [isminimized,setIsminimized] = useState(true);
-    const [totalVideos,setTotalVideos] = useState(0)
+    const [totalVideos,setTotalVideos] = useState(0);
+    const [reveal,setReveal] = useState(false)
+    const [intoComment,setIntoComment] = useState({})    
     const toggleminimized=()=>{
         setIsminimized(!isminimized)
     }
@@ -17,7 +19,7 @@ function AppContextProvider({children}){
 
 
     
-const value={isminimized,setIsminimized,toggleminimized,userData,setUserData,totalVideos,setTotalVideos,sameUser,setSameUser};
+const value={isminimized,setIsminimized,toggleminimized,userData,setUserData,totalVideos,setTotalVideos,reveal,setReveal,intoComment,setIntoComment,sameUser,setSameUser};
 
 return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }

@@ -4,11 +4,12 @@ import { AppContext } from "./AppContext";
 import { useNavigate } from "react-router-dom";
 import {AiOutlineMenu,AiOutlineFilter,AiOutlineClose} from "react-icons/ai"
 import {MdSearch} from "react-icons/md"
-import { toast } from "react-toastify";
-
+import { toast, ToastContainer } from "react-toastify";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap"
 function Navbar(){
     
-    const {toggleminimized,setUserData} = useContext(AppContext);
+    const {toggleminimized,setUserData,reveal,setReveal} = useContext(AppContext);
     const searchQuery = useRef(null)
     const userdata = useRef(null)
     const [filterclose,setFilterclose] =  useState(true)
@@ -34,6 +35,23 @@ function Navbar(){
         }
     }   
     
+    useGSAP(()=>{
+        if(reveal == false){
+            gsap.from('.search',{
+                display:'none',
+                width : '0px',
+                duration:1.2,
+                delay:0.2
+            })
+            gsap.from('#searchFilter',{
+                opacity:0,
+                duration:1,
+                delay:0.5
+            })
+            setReveal(true)
+        } 
+    })
+
     useEffect(()=>{
         
         const cookies = document.cookie.split("; ")
@@ -54,6 +72,8 @@ function Navbar(){
     },[])
     
     return(
+        <div>
+        <ToastContainer/>
         <div className="navbar">
             <div className= {filterclose ? 'nan1':''}  style={{zIndex:'99',height:'100vh',width:'100vw',backgroundColor:'rgba(0,0,0,0.3)',position:'fixed',top:'0px',left:'0px',display:'flex',alignItems:'center',justifyContent:'center'}}>
                 <div className="filter-options">
@@ -87,10 +107,11 @@ function Navbar(){
                 <input ref={searchQuery} placeholder="search here" type="text" name="search" id="search"/>
                 <button onClick={searching}><MdSearch id="MdSearch" size={24} color="#000"/></button>
             </div>
-            <AiOutlineFilter title="filter" style={{height:'5vh',width:'3vw',color:'black'}} onClick={()=> setFilterclose(false)} />
+            <AiOutlineFilter title="filter" id="searchFilter" style={{height:'5vh',width:'3vw',color:'black'}} onClick={()=> setFilterclose(false)} />
             </div>
             <div className="user_details" title="Your Activity" ref={userdata} onClick={()=>{navigate('/activity')}}></div>
         </div>
+        </div>        
     );
 }
 

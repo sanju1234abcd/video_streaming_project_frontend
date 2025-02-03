@@ -67,8 +67,6 @@ export const VideoPlayer = (props) => {
 
       const player = (playerRef.current = videojs(videoElement,options));
       player.el().classList.add('videoPlayer')
-     // player.el().style.height= '480px'
-      player.el().style.width='100%';
       player.el().style.borderRadius = '5px'
       player.el().style.overflow='hidden'
       

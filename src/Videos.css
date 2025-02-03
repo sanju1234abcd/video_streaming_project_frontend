@@ -1,6 +1,6 @@
 .infinite_scroll_videos{
     display: grid;
-    grid-template-columns: repeat(3,28vw);
+    grid-template-columns: repeat(3,30vw);
     justify-content: center;
 }
 @media (max-width:650px){

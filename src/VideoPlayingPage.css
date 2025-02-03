@@ -36,6 +36,7 @@
     align-items: center;
     justify-content: center;
     background-color: white;
+    z-index: 99;
 }
 #comment-input{
     max-height: 30%;
@@ -115,7 +116,7 @@
         padding-right: 5vw;
     }
     .comment-section{
-        height: 40vh/*calc(32vh + 480px)*/;
+        height: 70vh/*calc(32vh + 480px)*/;
         width: 90%;
         padding-left: 2vw;
         overflow-y: scroll;
